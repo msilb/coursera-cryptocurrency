@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -77,7 +77,7 @@ public class MaxFeeTxHandler {
 
         Collections.addAll(txsSortedByFees, possibleTxs);
 
-        ArrayList<Transaction> acceptedTxs = new ArrayList<>();
+        Set<Transaction> acceptedTxs = new HashSet<>();
         for (Transaction tx : txsSortedByFees) {
             if (isValidTx(tx)) {
                 acceptedTxs.add(tx);
