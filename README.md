@@ -1,2 +1,2 @@
 # coursera-cryptocurrency
-Assignments from the Coursera "Bitcoin and Cryptocurrency Technologies" course
+Assignments from the Coursera course "Bitcoin and Cryptocurrency Technologies"
