@@ -55,13 +55,6 @@ public class BlockChain {
             UTXO utxo = new UTXO(coinbase.getHash(), i);
             utxoPool.addUTXO(utxo, out);
         }
-        for (Transaction tx : genesisBlock.getTransactions()) {
-            for (int i = 0; i < tx.numOutputs(); i++) {
-                Transaction.Output out = tx.getOutput(i);
-                UTXO utxo = new UTXO(tx.getHash(), i);
-                utxoPool.addUTXO(utxo, out);
-            }
-        }
         BlockNode genesisNode = new BlockNode(genesisBlock, null, utxoPool);
         blockChain.put(wrap(genesisBlock.getHash()), genesisNode);
         txPool = new TransactionPool();
