@@ -49,12 +49,7 @@ public class BlockChain {
     public BlockChain(Block genesisBlock) {
         blockChain = new HashMap<>();
         UTXOPool utxoPool = new UTXOPool();
-        Transaction coinbase = genesisBlock.getCoinbase();
-        for (int i = 0; i < coinbase.numOutputs(); i++) {
-            Transaction.Output out = coinbase.getOutput(i);
-            UTXO utxo = new UTXO(coinbase.getHash(), i);
-            utxoPool.addUTXO(utxo, out);
-        }
+        addCoinbaseToUTXOPool(genesisBlock, utxoPool);
         BlockNode genesisNode = new BlockNode(genesisBlock, null, utxoPool);
         blockChain.put(wrap(genesisBlock.getHash()), genesisNode);
         txPool = new TransactionPool();
@@ -113,8 +108,7 @@ public class BlockChain {
             return false;
         }
         UTXOPool utxoPool = handler.getUTXOPool();
-        Transaction coinbase = block.getCoinbase();
-        utxoPool.addUTXO(new UTXO(coinbase.getHash(), 0), coinbase.getOutput(0));
+        addCoinbaseToUTXOPool(block, utxoPool);
         BlockNode node = new BlockNode(block, parentBlockNode, utxoPool);
         blockChain.put(wrap(block.getHash()), node);
         if (proposedHeight > maxHeightNode.height) {
@@ -128,6 +122,15 @@ public class BlockChain {
      */
     public void addTransaction(Transaction tx) {
         txPool.addTransaction(tx);
+    }
+
+    private void addCoinbaseToUTXOPool(Block block, UTXOPool utxoPool) {
+        Transaction coinbase = block.getCoinbase();
+        for (int i = 0; i < coinbase.numOutputs(); i++) {
+            Transaction.Output out = coinbase.getOutput(i);
+            UTXO utxo = new UTXO(coinbase.getHash(), i);
+            utxoPool.addUTXO(utxo, out);
+        }
     }
 
     private static ByteArrayWrapper wrap(byte[] arr) {
