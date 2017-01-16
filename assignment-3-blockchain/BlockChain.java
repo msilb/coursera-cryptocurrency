@@ -33,8 +33,6 @@ public class BlockChain {
         }
     }
 
-    //BlockNode blockChain;
-
     private HashMap<ByteArrayWrapper, BlockNode> blockChain;
     private BlockNode maxHeightNode;
     private TransactionPool txPool;
