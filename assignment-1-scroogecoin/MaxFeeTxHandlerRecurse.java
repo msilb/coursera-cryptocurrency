@@ -4,7 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MaxFeeTxHandler {
+/**
+ * Recursive solution
+*/
+public class MaxFeeTxHandlerRecurse {
 	
 	private UTXOPool ledger;
 
@@ -13,7 +16,7 @@ public class MaxFeeTxHandler {
      * {@code utxoPool}. This should make a copy of utxoPool by using the UTXOPool(UTXOPool uPool)
      * constructor.
      */
-    public MaxFeeTxHandler(UTXOPool utxoPool) {
+    public MaxFeeTxHandlerRecurse(UTXOPool utxoPool) {
     	ledger = new UTXOPool(utxoPool);
     }
 
